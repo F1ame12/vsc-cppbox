@@ -1,9 +1,9 @@
-#ifndef __MYLIST_H__
-#define __MYLIST_H__
+#ifndef __MYLIST_HPP__
+#define __MYLIST_HPP__
 
 namespace myds
 {
-    class IList
+    class IList 
     {
     public:
         virtual void Add(int value) = 0;
@@ -15,6 +15,15 @@ namespace myds
 
     class LinkList : public IList
     {
+    private:
+        struct Node
+        {
+            int value = 0;
+            Node* next = nullptr;
+        };
+
+        Node* head;
+        int size;
     public:
         LinkList();
         ~LinkList();
