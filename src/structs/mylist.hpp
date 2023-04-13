@@ -3,87 +3,71 @@
 
 namespace myds
 {
-    class IList 
+    template<class T>
+    class IList
     {
     public:
-        virtual void Add(int value) = 0;
-        virtual void Remove(int value) = 0;
-        virtual int Get(int index) = 0;
+        virtual void Add(T value) = 0;
+        virtual void Remove(T value) = 0;
+        virtual int Get(T index) = 0;
         virtual int Size() = 0;
         virtual void Clear() = 0;
+        virtual void Print() = 0;
+        virtual void Sort() = 0;
+        virtual void Reverse() = 0;
+        virtual void Insert(T value, T index) = 0;
+        virtual void RemoveAt(T index) = 0;
+        virtual void Set(T value, T index) = 0;
+        virtual void AddRange(T* values, T count) = 0;
+        virtual void RemoveRange(T* values, T count) = 0;
+        virtual void InsertRange(T* values, T count, T index) = 0;
+        virtual void RemoveRangeAt(T* values, T count, T index) = 0;
+        virtual void SetRange(T* values, T count, T index) = 0;
     };
 
-    class LinkList : public IList
+    template<class T>
+    class List : public IList<T>
     {
     private:
         struct Node
         {
-            int value = 0;
-            Node* next = nullptr;
+            T value;
+            Node* next;
+            Node* prev;
         };
 
         Node* head;
-        int size;
+        Node* tail;
+        unsigned int size;
+
     public:
-        LinkList()
+        List()
         {
             head = nullptr;
+            tail = nullptr;
             size = 0;
         }
 
-        ~LinkList()
+        ~List()
         {
-            this->Clear();
+            Clear();
         }
 
-        LinkList(const LinkList& other)
+        void Clear() override
         {
+            Node* current = head;
+            while (current != nullptr)
+            {
+                Node* next = current->next;
+                delete current;
+                current = next;
+            }
             head = nullptr;
+            tail = nullptr;
             size = 0;
-            Node* p = other.head;
-            while (p != nullptr)
-            {
-                this->Add(p->value);
-                p = p->next;
-            }
         }
-
-        void Add(int value) override 
-        {
-            Node* p = new Node();
-            p->value = value;
-            p->next = head;
-            head = p;
-            size++;
-        }
-        void Remove(int value) override
-        {
-            Node* p = head;
-            Node* q = nullptr;
-            while (p != nullptr)
-            {
-                if (p->value == value)
-                {
-                    if (q == nullptr)
-                    {
-                        head = p->next;
-                    }
-                    else
-                    {
-                        q->next = p->next;
-                    }
-                    delete p;
-                    size--;
-                    break;
-                }
-                q = p;
-                p = p->next;
-            }
-        }
-        int Get(int index);
-        int Size();
-        void Clear();
     };
+
 }
 
 
