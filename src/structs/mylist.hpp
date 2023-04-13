@@ -25,11 +25,61 @@ namespace myds
         Node* head;
         int size;
     public:
-        LinkList();
-        ~LinkList();
+        LinkList()
+        {
+            head = nullptr;
+            size = 0;
+        }
 
-        void Add(int value);
-        void Remove(int value);
+        ~LinkList()
+        {
+            this->Clear();
+        }
+
+        LinkList(const LinkList& other)
+        {
+            head = nullptr;
+            size = 0;
+            Node* p = other.head;
+            while (p != nullptr)
+            {
+                this->Add(p->value);
+                p = p->next;
+            }
+        }
+
+        void Add(int value) override 
+        {
+            Node* p = new Node();
+            p->value = value;
+            p->next = head;
+            head = p;
+            size++;
+        }
+        void Remove(int value) override
+        {
+            Node* p = head;
+            Node* q = nullptr;
+            while (p != nullptr)
+            {
+                if (p->value == value)
+                {
+                    if (q == nullptr)
+                    {
+                        head = p->next;
+                    }
+                    else
+                    {
+                        q->next = p->next;
+                    }
+                    delete p;
+                    size--;
+                    break;
+                }
+                q = p;
+                p = p->next;
+            }
+        }
         int Get(int index);
         int Size();
         void Clear();
