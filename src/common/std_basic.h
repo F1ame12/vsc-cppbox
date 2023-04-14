@@ -4,5 +4,9 @@
 #include <iostream>
 #include <fstream>
 #include <string>
+#include <vector>
+#include <limits>
+#include <map>
+#include <unordered_map>
 
 #endif

@@ -1,9 +1,9 @@
-#include "common/std_basic.h"
+#include "./common/std_basic.h"
 
 int main()
 {
-    std::cout << "Hello World!" << std::endl;
-
+    
+    
 
     return 0;
 
