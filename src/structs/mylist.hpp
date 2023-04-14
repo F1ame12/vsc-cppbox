@@ -50,22 +50,10 @@ namespace myds
 
         ~List()
         {
-            Clear();
+            
         }
 
-        void Clear() override
-        {
-            Node* current = head;
-            while (current != nullptr)
-            {
-                Node* next = current->next;
-                delete current;
-                current = next;
-            }
-            head = nullptr;
-            tail = nullptr;
-            size = 0;
-        }
+        
     };
 
 }
