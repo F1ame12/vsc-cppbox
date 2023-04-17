@@ -9,10 +9,10 @@ namespace Util
     {
         static const std::string basicStr {"abcdefghigklmnopqrstuvwxyz0123456789"};
         static std::random_device rd;
+        static std::mt19937_64 mt(rd());
 
         if (maxLen <= 0) return "";
         
-        std::mt19937_64 mt(rd());
         std::uniform_int_distribution ud(0, static_cast<int>(basicStr.length() - 1));
 
         char buffer[maxLen] {};
