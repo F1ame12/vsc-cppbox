@@ -7,10 +7,10 @@ namespace myds
     class IList
     {
     public:
-        virtual void Add(T value) = 0;
+        virtual void Append(T value) = 0;
         virtual void Remove(T value) = 0;
-        virtual int Get(T index) = 0;
-        virtual int Size() = 0;
+        virtual T Get(const int index) = 0;
+        virtual const int Size() = 0;
         virtual void Clear() = 0;
         virtual void Print() = 0;
         virtual void Sort() = 0;
@@ -53,6 +53,11 @@ namespace myds
             this->Clear();
         }
 
+        const int Size() const override
+        {
+            return this->size;
+        }
+
         void Clear() override
         {
             Node* cursor = this->head;
@@ -65,6 +70,40 @@ namespace myds
             this->head = nullptr;
             this->tail = nullptr;
             size = 0;
+        }
+
+        void Append(T value) override
+        {
+            if (this->head == nullptr)
+            {
+                Node* newNode = new Node();
+                newNode->value = T;
+                this->head = newNode;
+                this->tail = newNode;
+                this->size = 1;
+            }
+            else
+            {
+                Node* newNode = new Node();
+                newNode->value = T;
+                newNode->next = this->tail;
+                newNode->prev = this->tail->prev;
+                this->tail->prev = newNode;
+                this->size++;
+            }
+        }
+
+        void Remove(T value) override
+        {
+            Node* target = this->head;
+            while (target)
+            {
+                if (target->value == value) break;
+                target = target->next;
+            }
+            if (target->next) target->prev->next = target->next;
+            if (target->prev) target->next->prev = target->prev;
+            delete target;
         }
 
         
