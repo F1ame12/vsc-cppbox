@@ -47,6 +47,12 @@
         "typeinfo": "cpp",
         "map": "cpp",
         "bitset": "cpp",
-        "set": "cpp"
+        "set": "cpp",
+        "codecvt": "cpp",
+        "ctime": "cpp",
+        "unordered_set": "cpp",
+        "ratio": "cpp",
+        "iomanip": "cpp",
+        "sstream": "cpp"
     }
 }
