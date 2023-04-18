@@ -23,25 +23,21 @@ public:
 
     int maxAncestorDiff(TreeNode *root)
     {
-        checkDelta(root);
-        return max;
+        return getDelta(root, root->val, root->val);
     }
 
-    void checkDelta(TreeNode* root)
+    int getDelta(TreeNode* root, int min, int max)
     {
-        if (!root) return;
+        if (root == nullptr) 
+            return 0;
 
-        for (const int& val : parentVals)
-        {
-            unsigned int delta = std::abs(root->val - val);
-            if (delta > max) max = delta;
-        }
+        int delta = std::max(std::abs(root->val - min), std::abs(root->val - max));
+        min = std::min(min, root->val);
+        max = std::max(max, root->val);
 
-        parentVals.push_back(root->val);
+        delta = std::max(delta, getDelta(root->left, min, max));
+        delta = std::max(delta, getDelta(root->right, min, max));
 
-        checkDelta(root->left);
-        checkDelta(root->right);
-
-        parentVals.pop_back();
+        return delta;
     }
 };
