@@ -9,8 +9,10 @@ namespace TestBox
     {
         using namespace std;
 
-        char buffer[1024];
-        while (cin.getline(buffer, 1024, ','))
+        istringstream s("1,2,3,4,5");
+
+        char buffer[1024] {};
+        while (s.getline(buffer, 1024, ','))
         {
             cout << buffer << endl;
         }
