@@ -7,8 +7,10 @@
 #include <ctime>
 #include <iostream>
 #include <filesystem>
+#include <memory>
 #include <fstream>
 #include <string>
+#include <cstring>
 #include <vector>
 #include <limits>
 #include <map>
