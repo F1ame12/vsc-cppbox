@@ -20,10 +20,12 @@ namespace TestBox
 
     void TestStringModify()
     {
-        std::string buffer;
+        using namespace std;
+        std::string buffer {"test content"};
         buffer.reserve(1024);
 
-        assert(buffer.data() == &buffer[0]);
+        cout << buffer.data() << " " << buffer[0] << endl;
+
         buffer.data()[0] = '1';
         buffer.data()[1] = '\0';
         std::cout << buffer << " " << buffer.data();
