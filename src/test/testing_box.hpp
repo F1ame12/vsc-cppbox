@@ -17,6 +17,17 @@ namespace TestBox
             cout << buffer << endl;
         }
     }
+
+    void TestStringModify()
+    {
+        std::string buffer;
+        buffer.reserve(1024);
+
+        assert(buffer.data() == &buffer[0]);
+        buffer.data()[0] = '1';
+        buffer.data()[1] = '\0';
+        std::cout << buffer << " " << buffer.data();
+    }
 }
 
 #endif

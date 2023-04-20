@@ -6,7 +6,9 @@
 
 int main()
 {
-    StructTest::TestAll();
+    //StructTest::TestAll();
+
+    TestBox::TestStringModify();
 
     return 0;
 
