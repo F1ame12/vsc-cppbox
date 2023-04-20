@@ -1,6 +1,9 @@
 #ifndef __MYLIST_HPP__
 #define __MYLIST_HPP__
 
+#include <string>
+#include <sstream>
+
 namespace myds
 {
     template<class T>
@@ -12,17 +15,9 @@ namespace myds
         virtual T Get(const int index) = 0;
         virtual const int Size() = 0;
         virtual void Clear() = 0;
-        virtual void Print() = 0;
-        virtual void Sort() = 0;
-        virtual void Reverse() = 0;
-        virtual void Insert(T value, T index) = 0;
-        virtual void RemoveAt(T index) = 0;
+        virtual std::string ToString() = 0;
         virtual void Set(T value, T index) = 0;
-        virtual void AddRange(T* values, T count) = 0;
-        virtual void RemoveRange(T* values, T count) = 0;
-        virtual void InsertRange(T* values, T count, T index) = 0;
-        virtual void RemoveRangeAt(T* values, T count, T index) = 0;
-        virtual void SetRange(T* values, T count, T index) = 0;
+
     };
 
     template<class T>
@@ -53,7 +48,7 @@ namespace myds
             this->Clear();
         }
 
-        const int Size() const override
+        const int Size() override
         {
             return this->size;
         }
@@ -61,7 +56,7 @@ namespace myds
         void Clear() override
         {
             Node* cursor = this->head;
-            while (cursor->next)
+            while (cursor)
             {
                 Node* tmp = cursor;
                 cursor = cursor->next;
@@ -72,12 +67,37 @@ namespace myds
             size = 0;
         }
 
+        T Get(const int index) override
+        {
+            if (index < 0) return T();
+            if (index >= this->size) return T();
+
+            Node* cursor = this->head;
+            for (int i = 0; i < index; i++)
+            {
+                cursor = cursor->next;
+            }
+            return cursor->value;
+        }
+
+        void Set(T value, T index) override
+        {
+            if (index < 0 || index >= this->size) return;
+
+            Node* cursor = this->head;
+            while (index-- > 0)
+            {
+                cursor = cursor->next;
+            }
+            cursor->value = value;
+        }
+
         void Append(T value) override
         {
             if (this->head == nullptr)
             {
                 Node* newNode = new Node();
-                newNode->value = T;
+                newNode->value = value;
                 this->head = newNode;
                 this->tail = newNode;
                 this->size = 1;
@@ -85,10 +105,10 @@ namespace myds
             else
             {
                 Node* newNode = new Node();
-                newNode->value = T;
-                newNode->next = this->tail;
-                newNode->prev = this->tail->prev;
-                this->tail->prev = newNode;
+                newNode->value = value;
+                this->tail->next = newNode;
+                newNode->prev = this->tail;
+                this->tail = newNode;
                 this->size++;
             }
         }
@@ -104,6 +124,26 @@ namespace myds
             if (target->next) target->prev->next = target->next;
             if (target->prev) target->next->prev = target->prev;
             delete target;
+            this->size--;
+        }
+
+        std::string ToString() override
+        {
+            std::ostringstream stream;
+            stream << "[";
+            Node* cursor = this->head;
+            for (int i = 0; i < this->size; i++)
+            {
+                stream << cursor->value;
+                cursor = cursor->next;
+                if (i + 1 != this->size)
+                {
+                    stream << ",";
+                }
+            }
+            stream << "]";
+
+            return stream.str();
         }
 
         
