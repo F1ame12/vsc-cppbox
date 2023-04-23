@@ -4,11 +4,11 @@
 #include "./test/testing_box.hpp"
 #include "./test/struct_test.hpp"
 
+#include "./structs/dynamic_string.hpp"
+
 int main()
 {
-    //StructTest::TestAll();
-
-    TestBox::TestStringModify();
+    
 
     return 0;
 

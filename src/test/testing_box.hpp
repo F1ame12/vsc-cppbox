@@ -21,14 +21,19 @@ namespace TestBox
     void TestStringModify()
     {
         using namespace std;
-        std::string buffer {"test content"};
+        std::string buffer {"testcontent"};
         buffer.reserve(1024);
 
-        cout << buffer.data() << " " << buffer[0] << endl;
+        cout << buffer.data() << endl;
 
-        buffer.data()[0] = '1';
-        buffer.data()[1] = '\0';
-        std::cout << buffer << " " << buffer.data();
+        char* ptr = buffer.data();
+
+        ptr[0] = '2';
+        ptr[1] = '3';
+
+        while(cin.getline(buffer.data(), buffer.capacity())) {};
+
+        cout << buffer;
     }
 }
 

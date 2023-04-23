@@ -3,6 +3,7 @@
 
 #include "../common/std_basic.h"
 #include "../structs/mylist.hpp"
+#include "../structs/dynamic_string.hpp"
 
 namespace StructTest
 {
@@ -13,7 +14,7 @@ namespace StructTest
         {
             list.Append(i);
         }
-        
+
         assert(list.ToString() == "[0,1,2,3,4,5]");
 
         list.Remove(3);
@@ -23,16 +24,22 @@ namespace StructTest
         assert(list.ToString() == "[]");
     }
 
+    void DynamicStringTest()
+    {
+        myds::DynamicString ds {6};
+        ds.add("123456");
+        std::cout << ds << std::endl;
+    }
+
     void TestAll()
     {
-        LinkListTest();
+        //LinkListTest();
+        DynamicStringTest();
 
-        using std::cout,std::endl;
+        using std::cout, std::endl;
         cout << "Struct Test Finished" << endl;
     }
 
-
-    
 }
 
 #endif
