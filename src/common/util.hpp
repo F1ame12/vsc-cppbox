@@ -7,7 +7,7 @@ namespace Util
 {
     const std::string randStr(const int maxLen)
     {
-        static const std::string basicStr {"abcdefghigklmnopqrstuvwxyz0123456789"};
+        static const std::string basicStr {"abcdefghigklmnopqrstuvwxyzABCDEFGHIGKLMNOPQRSTVWXYZ0123456789"};
         static std::random_device rd;
         static std::mt19937_64 mt(rd());
 

@@ -13,6 +13,7 @@
 #include <string>
 #include <cstring>
 #include <vector>
+#include <algorithm>
 #include <limits>
 #include <map>
 #include <unordered_map>
