@@ -4,6 +4,7 @@
 #include "../common/std_basic.h"
 #include "../structs/mylist.hpp"
 #include "../structs/dynamic_string.hpp"
+#include "../structs/heap.hpp"
 
 namespace StructTest
 {
@@ -29,6 +30,13 @@ namespace StructTest
         myds::DynamicString ds {6};
         ds.add("123456");
         std::cout << ds << std::endl;
+    }
+
+    void HeapTest()
+    {
+        using std::cout, std::endl;
+        myds::Heap<int> heap {5,4,3,2,1};
+        cout << heap.ToString() << endl;
     }
 
     void TestAll()
