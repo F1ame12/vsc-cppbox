@@ -36,6 +36,9 @@ namespace StructTest
     {
         using std::cout, std::endl;
         myds::Heap<int> heap {5,4,3,2,1};
+        // 5 1 3 2 4
+        // 1 5 3 2 4
+        // 1 2 3 5 4
         cout << heap.ToString() << endl;
     }
 

@@ -66,26 +66,48 @@ namespace myds
             return stream.str();
         }
 
+        const int Insert(const T& value)
+        {
+            if (this->elemSize >= this->capacity)
+            {
+                this->Resize(this->capacity * 2);
+            }
+            this->elements[this->elemSize] = value;
+            return this->ShiftUp(this->elemSize++);
+        }
+
+        T Pop()
+        {
+            T tmp = this->elements[0];
+            this->elements[0] = this->elements[this->elemSize - 1];
+            this->elemSize--;
+            this->ShiftDown(0);
+            return tmp;
+        }
+
     protected:
         int Parent(const int index)
         {
-            return (index - 1) >> 1;
+            return (index - 1) / 2;
         }
         int LeftChild(const int index)
         {
-            return (index << 1) + 1;
+            return (index * 2) + 1;
         }
         int RightChild(const int index)
         {
-            return (index << 1) + 2;
+            return (index * 2) + 2;
         }
 
         void MakeHeap()
         {
-            
+            for (int index = (this->elemSize - 1) / 2; index >= 0; index--)
+            {
+                this->ShiftDown(index);
+            }
         }
 
-        void ShiftUp(const int index)
+        const int ShiftUp(const int index)
         {
             int parent = this->Parent(index);
             int i = index;
@@ -95,34 +117,41 @@ namespace myds
                 i = parent;
                 parent = this->Parent(i);
             }
+            return i;
         }
 
+        /**
+         * 非递归式元素下沉操作
+         * 从传入结点的左右子结点中选出最优先于传入结点的结点并交换位置
+         * 持续上述操作直至抵达叶子结点
+        */
         void ShiftDown(const int index)
         {
             int parent = index;
+            int last = parent;
             do
             {
-                int change = -1;
-
+                int larger = parent;
                 int left = this->LeftChild(parent);
-                if (left < this->elemSize && this->compare(this->elements[left], this->elements[parent]))
+                if (left < this->elemSize && this->compare(this->elements[left], this->elements[larger]))
                 {
-                    change = left;   
+                    larger = left;
                 }
 
                 int right = this->RightChild(parent);
-                if (right < this->elements && this->compare(this->elements[right], this->elements[parent]))
+                if (right < this->elemSize && this->compare(this->elements[right], this->elements[larger]))
                 {
-                    change = right;
+                    larger = right;
                 }
 
-                if (change != -1)
+                if (larger != parent)
                 {
-                    std::swap(this->elements[parent], this->elements[change]);
+                    std::swap(this->elements[parent], this->elements[larger]);
                 }
-                parent = change;
+                last = parent;
+                parent = larger;
 
-            } while (parent != -1);
+            } while (parent != last);
         }
     };
 }
