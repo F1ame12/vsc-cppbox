@@ -85,6 +85,22 @@ namespace myds
             return tmp;
         }
 
+        void Sort()
+        {
+            this->MakeHeap();
+
+            int saveSize = this->elemSize;
+            int lastIndex = this->elemSize - 1;
+            while (lastIndex > 0)
+            {
+                std::swap(this->elements[0], this->elements[lastIndex]);
+                lastIndex--;
+                this->elemSize--;
+                this->ShiftDown(0);
+            }
+            this->elemSize = saveSize;
+        }
+
     protected:
         int Parent(const int index)
         {
