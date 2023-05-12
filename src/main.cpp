@@ -5,8 +5,8 @@
 
 int main()
 {
-    StructTest::HeapTest();
-
+    
+    TestBox::TestMemAlign();
     
 
     return 0;

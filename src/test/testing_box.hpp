@@ -35,6 +35,17 @@ namespace TestBox
 
         cout << buffer;
     }
+
+
+    void TestMemAlign()
+    {
+        using namespace std;
+
+        cout << sizeof(short) << " " << sizeof(int) << " "
+            << sizeof(long) << " " << sizeof(long long) << " "
+            << sizeof(int*) << " "
+            << endl;
+    }
 }
 
 #endif
