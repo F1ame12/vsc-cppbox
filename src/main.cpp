@@ -5,10 +5,10 @@
 
 int main()
 {
-    
-    TestBox::TestMemAlign();
-    
+    namespace fs = std::filesystem;
+
+    const fs::path cwd = fs::current_path();
+    std::cout << cwd.string() << std::endl;
 
     return 0;
-
 }

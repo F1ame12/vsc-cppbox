@@ -23,6 +23,7 @@ public:
     SmallToy &operator=(const SmallToy &) = delete;
 
     const int GetToyMaxSize();
+    bool checkData() const;
 };
 
 class ToyBase
