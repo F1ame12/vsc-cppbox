@@ -9,7 +9,7 @@ namespace Util
     {
         static const std::string basicStr {"abcdefghigklmnopqrstuvwxyzABCDEFGHIGKLMNOPQRSTVWXYZ0123456789"};
         static std::random_device rd;
-        static std::mt19937_64 mt(rd());
+        static std::default_random_engine engine(rd());
 
         if (maxLen <= 0) return "";
         
@@ -18,7 +18,7 @@ namespace Util
         char buffer[maxLen] {};
         for (int i = 0; i < maxLen; i++)
         {
-            const int randPos = ud(mt);
+            const int randPos = ud(engine);
             buffer[i] = basicStr.at(randPos);
         }
 
